@@ -76,7 +76,7 @@ PAYLOAD={
 PAYLOAD = json.dumps(PAYLOAD)
 headers={"Content-Type":"application/json","X-Auth-Key":CLOUDFLARE_API_KEY,"X-Auth-Email":CLOUDFLARE_EMAIL}
 
-ttl=60
+ttl=59
 def get_blocked_ip():
   global ttl
   ttl=ttl-1
