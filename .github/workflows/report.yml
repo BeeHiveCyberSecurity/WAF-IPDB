@@ -2,7 +2,7 @@ name: Report
 on:
   push:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '15 * * * *'
   watch:
     types: [started]
   workflow_dispatch:
