@@ -1,0 +1,25 @@
+name: Report
+on:
+  push:
+  schedule:
+    - cron: '0 */2 * * *'
+  watch:
+    types: [started]
+  workflow_dispatch:
+jobs:
+  build:
+    if: github.repository == 'MHG-LAB/Cloudflare-WAF-to-AbuseIPDB'
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Shanghai
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+    - name: Set up python
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install requirements
+      run: pip install -r requirements.txt
+    - name: Report
+      run: python main.py ${{ secrets.CLOUDFLARE_ZONE_ID }}  ${{ secrets.CLOUDFLARE_EMAIL }}  ${{ secrets.CLOUDFLARE_API_KEY }}  ${{ secrets.ABUSEIPDB_API_KEY }}

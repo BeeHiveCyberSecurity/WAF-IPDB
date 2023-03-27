@@ -1,0 +1,5 @@
+Contact: mailto:SB@Script.Kiddie
+Encryption: https://keybase.io/Kiddie/pgp_keys.asc?fingereprint=192D9D0D0C89C1F5E4E2D0FDBE6DE9D185C0D60B
+Acknowledgement: /#/score-board
+Prefered-language: en, de, fr, es, it, nl, ja, pt, ru, uk, zh-CN, zh-TW
+Expires: Sat, 01 Jan 2666 00:00:00 GMT
