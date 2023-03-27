@@ -1,17 +1,12 @@
 name: Report
 on:
-  push:
-  schedule:
+  workflow_dispatch:
+    schedule:
     - cron: '15 * * * *'
   watch:
     types: [started]
   workflow_dispatch:
 jobs:
-  build:
-    if: github.repository == 'MHG-LAB/Cloudflare-WAF-to-AbuseIPDB'
-    runs-on: ubuntu-latest
-    env:
-      TZ: Asia/Shanghai
     steps:
     - name: Checkout
       uses: actions/checkout@main
