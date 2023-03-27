@@ -93,7 +93,7 @@ def get_blocked_ip():
     get_blocked_ip()
 
 def get_comment(it):
-  return "Threat Blocked by BeeHive from ASN: "+it['clientAsn']+" Network: "+it['clientASNDescription']+" Host: "+it['clientRequestHTTPHost']+" Method: "+it['clientRequestHTTPMethodName']+" Protocol: "+it['clientRequestHTTPProtocol']+" datetime: "+it['datetime']+" userAgent: "+it['userAgent']+"."
+  return "Threat Blocked by BeeHive from (ASN:"+it['clientAsn']+") (Network:"+it['clientASNDescription']+") (Host:"+it['clientRequestHTTPHost']+") (Method:"+it['clientRequestHTTPMethodName']+") (Protocol:"+it['clientRequestHTTPProtocol']+") (Timestamp:"+it['datetime']+")"
 
 def report_bad_ip(it):
   try:
