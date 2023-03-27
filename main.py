@@ -117,6 +117,8 @@ def report_bad_ip(it):
   except Exception as e:
     print("error:",e)
 
+# 排除配置错误的规则
+excepted_ruleId = ["fa01280809254f82978e827892db4e46"]
 
 print("==================== Start ====================")
 print(str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
