@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    if: github.repository == 'MHG-LAB/Cloudflare-WAF-to-AbuseIPDB'
+    if: github.repository == 'BeeHiveCyberSecurity/WAF-IPDB'
     runs-on: ubuntu-latest
     env:
-      TZ: Asia/Shanghai
+      TZ: US/Denver
     steps:
     - name: Checkout
       uses: actions/checkout@main
