@@ -18,17 +18,6 @@ Actions：
 - `CLOUDFLARE_EMAIL`: Cloudflare Email
 - `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
 
-## What are these strange files?
-
-Someone regularly accesses these, and I don't have the files here, so I create them.
-
-For example these:
-
-- https://abuseipdb.mhuig.top/robots.txt
-- https://abuseipdb.mhuig.top/phpinfo.php
-- https://abuseipdb.mhuig.top/wp-login.php
-- https://abuseipdb.mhuig.top/../../../../../../../etc/passwd
-- etc.
 
 ## Make complaints
 
