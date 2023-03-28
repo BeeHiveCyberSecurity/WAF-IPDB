@@ -12,7 +12,7 @@ Get IPs blocked (blocked/managed challenges) by Cloudflare WAF from Cloudflare G
 
 Don't fork this repo - that's not how this is designed to be used. Instead, select "Use this template", then "Create new repository".
 
-Actions：
+# Configuring GitHub Actions：
 
 If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up. After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
 
@@ -21,6 +21,7 @@ If you don't configure these, you'll stare at errors for eternity wondering wher
 - `CLOUDFLARE_EMAIL`: Cloudflare Email
 - `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
 
+**PLEASE READ THIS:*** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. DO NOT TURN THIS ON IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS, YOU WILL RUIN IT FOR EVERYONE.
 
 ## Related
 
