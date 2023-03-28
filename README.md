@@ -2,7 +2,7 @@
 
 ## What's this?
 
-我也不知道
+A GitHub Workflow-friendly template that when configured correctly, will auto-report firewall block events to AbuseIPDB.
 
 ## What it does?
 
@@ -13,17 +13,14 @@ Get IPs blocked (blocked/managed challenges) by Cloudflare WAF from Cloudflare G
 Don't fork this repo - that's not how this is designed to be used. Instead, select "Use this template", then "Create new repository".
 
 Actions：
+
+If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up. After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
+
 - `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
 - `CLOUDFLARE_API_KEY`: Cloudflare API Key
 - `CLOUDFLARE_EMAIL`: Cloudflare Email
 - `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
 
-
-## Make complaints
-
-Cloudflare's API doesn't know when a change was made, and when I found the documentation, I found that PAYLOAD requires Graphql....
-
-If the IP is accidentally injured, please contact me to add the whitelist!
 
 ## Related
 
