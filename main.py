@@ -45,7 +45,7 @@ PAYLOAD={
       zones(filter: { zoneTag: $zoneTag }) {
         firewallEventsAdaptive(
           filter: $filter
-          limit: 25000
+          limit: 5000
           orderBy: [datetime_DESC]
         ) {
           action
