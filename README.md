@@ -32,16 +32,21 @@ The script prints a message indicating that it has started and the current time.
 
 Don't fork this repo - that's not how this is designed to be used. Instead, select "Use this template", then "Create new repository".
 
-# Configuring GitHub Actions：
+# First, Enable and Configure GitHub Actions：
 
-If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up. After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
+If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up.
+After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
 
 - `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
 - `CLOUDFLARE_API_KEY`: Cloudflare API Key
 - `CLOUDFLARE_EMAIL`: Cloudflare Email
 - `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
 
-**PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. DO NOT TURN THIS ON IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS, YOU WILL RUIN IT FOR EVERYONE.
+  After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
+
+**PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
+
+DO NOT TURN THIS ON IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS, YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
 
 ## Related
 
