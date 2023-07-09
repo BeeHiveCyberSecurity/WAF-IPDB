@@ -46,7 +46,8 @@ After you create a new repository thru "Use This Template", go into the reposito
 
 **PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
 
-DO NOT TURN THIS ON IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS, YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
+DO NOT TURN THIS ON IN IT'S DEFAULT EXISTANCE IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS
+YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
 
 ## Related
 
