@@ -130,7 +130,8 @@ def report_bad_ip(it):
     params = {
       'ip': it['clientIP'],
       'categories': '9,13,14,15,16,19,20,21',
-      'comment': get_comment(it)
+      'comment': get_comment(it),
+      'timestamp': it['datetime']
     }
     headers = {
       'Accept': 'application/json',
