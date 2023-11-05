@@ -75,6 +75,7 @@ PAYLOAD={
       # "OR":[{"action": "block"}, {"action": "managed_challenge"}, {"action": "jschallenge"}],
       "AND":[
           {"action_neq": "allow"},
+          {"action_neq": "skip"},
           {"action_neq": "challenge_solved"},
           {"action_neq": "challenge_failed"},
           {"action_neq": "challenge_bypassed"},
