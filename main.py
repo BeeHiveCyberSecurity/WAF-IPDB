@@ -165,7 +165,7 @@ print("Events from:  " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeFrom)))
 print("Events until: " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeUntil)))
 a=get_blocked_ip()
 print(str(type(a)))
-if str(type(a)) == "<class 'dict'>" and len(a)>0:
+if isinstance(a, dict) and len(a)>0:
   ip_bad_list=a["data"]["viewer"]["zones"][0]["firewallEventsAdaptive"]
   print(len(ip_bad_list))
 
