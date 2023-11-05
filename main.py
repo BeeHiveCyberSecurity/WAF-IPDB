@@ -38,6 +38,9 @@ else:
   CLOUDFLARE_API_KEY = os.environ["CLOUDFLARE_API_KEY"]
   ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
 
+rangeFrom = time.localtime(time.time()-60*60*2.5)
+rangeUntil = time.localtime(time.time())
+
 # Set payload for Cloudflare API requests
 PAYLOAD={
   "query": """query ListFirewallEvents($zoneTag: string, $filter: FirewallEventsAdaptiveFilter_InputObject) {
@@ -70,8 +73,8 @@ PAYLOAD={
   "variables": {
     "zoneTag": CLOUDFLARE_ZONE_ID,
     "filter": {
-      "datetime_geq": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.localtime(time.time()-60*60*8-60*60*2.5)),
-      "datetime_leq": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.localtime(time.time()-60*60*8)),
+      "datetime_geq": time.strftime("%Y-%m-%dT%H:%M:%SZ", rangeFrom),
+      "datetime_leq": time.strftime("%Y-%m-%dT%H:%M:%SZ", rangeUntil),
       # "OR":[{"action": "block"}, {"action": "managed_challenge"}, {"action": "jschallenge"}],
       "AND":[
           {"action_neq": "allow"},
@@ -158,8 +161,8 @@ excepted_ruleId = ["fa01280809254f82978e827892db4e46"]
 
 # Print start time and end time within output
 print("==================== Start ====================")
-print(str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
-print(str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()-60*60*8))))
+print("Events from:  " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeFrom)))
+print("Events until: " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeUntil)))
 a=get_blocked_ip()
 print(str(type(a)))
 if str(type(a)) == "<class 'dict'>" and len(a)>0:
