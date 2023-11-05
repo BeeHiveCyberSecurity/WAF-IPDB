@@ -32,11 +32,11 @@ if os.path.exists('config.yml'):
   # Set AbuseIPDB API Key
   ABUSEIPDB_API_KEY = c['ABUSEIPDB_API_KEY']
 else:
-    # If configuration file does not exist, get credentials from command line.
-  CLOUDFLARE_ZONE_ID = sys.argv[1]
-  CLOUDFLARE_EMAIL = sys.argv[2]
-  CLOUDFLARE_API_KEY = sys.argv[3]
-  ABUSEIPDB_API_KEY = sys.argv[4]
+  # If configuration file does not exist, get credentials from environment variables
+  CLOUDFLARE_ZONE_ID = os.environ["CLOUDFLARE_ZONE_ID"]
+  CLOUDFLARE_EMAIL = os.environ["CLOUDFLARE_EMAIL"]
+  CLOUDFLARE_API_KEY = os.environ["CLOUDFLARE_API_KEY"]
+  ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
 
 # Set payload for Cloudflare API requests
 PAYLOAD={

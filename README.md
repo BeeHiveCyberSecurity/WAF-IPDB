@@ -12,11 +12,11 @@ The script first imports several libraries: `json`, `requests`, `time`, `os`, `y
 
 `time` is used to get the current time and format it for use in the query payload.
 
-`os` and `sys` are used to load configuration data from a YAML file or command line arguments.
+`os` and `sys` are used to load configuration data from a YAML file or environment variables.
 
 The `load_config` function reads a YAML file and returns a dictionary of the file's contents.
 
-If a `config.yml` file exists in the current directory, the script loads configuration data from it. If the file does not exist, the script expects to receive four command line arguments: `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, `CLOUDFLARE_API_KEY`, and `ABUSEIPDB_API_KEY`.
+If a `config.yml` file exists in the current directory, the script loads configuration data from it. If the file does not exist, the script instead loads the configuration data from the following four environment variables: `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, `CLOUDFLARE_API_KEY`, and `ABUSEIPDB_API_KEY`.
 
 The script then constructs a payload containing a GraphQL query that filters Cloudflare's firewall event logs for potentially malicious events that occurred within the last 8.5 hours. The payload includes Cloudflare's `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, and `CLOUDFLARE_API_KEY` for authentication. The payload is sent as a `JSON` string to the Cloudflare API.
 
@@ -35,7 +35,7 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 # First, Enable and Configure GitHub Actions：
 
 If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up.
-After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
+After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
 
 - `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
 - `CLOUDFLARE_API_KEY`: Cloudflare API Key
