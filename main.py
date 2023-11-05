@@ -32,11 +32,14 @@ if os.path.exists('config.yml'):
   # Set AbuseIPDB API Key
   ABUSEIPDB_API_KEY = c['ABUSEIPDB_API_KEY']
 else:
-    # If configuration file does not exist, get credentials from command line.
-  CLOUDFLARE_ZONE_ID = sys.argv[1]
-  CLOUDFLARE_EMAIL = sys.argv[2]
-  CLOUDFLARE_API_KEY = sys.argv[3]
-  ABUSEIPDB_API_KEY = sys.argv[4]
+  # If configuration file does not exist, get credentials from environment variables
+  CLOUDFLARE_ZONE_ID = os.environ["CLOUDFLARE_ZONE_ID"]
+  CLOUDFLARE_EMAIL = os.environ["CLOUDFLARE_EMAIL"]
+  CLOUDFLARE_API_KEY = os.environ["CLOUDFLARE_API_KEY"]
+  ABUSEIPDB_API_KEY = os.environ["ABUSEIPDB_API_KEY"]
+
+rangeFrom = time.localtime(time.time()-60*60*2.5)
+rangeUntil = time.localtime(time.time())
 
 # Set payload for Cloudflare API requests
 PAYLOAD={
@@ -70,11 +73,12 @@ PAYLOAD={
   "variables": {
     "zoneTag": CLOUDFLARE_ZONE_ID,
     "filter": {
-      "datetime_geq": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.localtime(time.time()-60*60*8-60*60*2.5)),
-      "datetime_leq": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.localtime(time.time()-60*60*8)),
+      "datetime_geq": time.strftime("%Y-%m-%dT%H:%M:%SZ", rangeFrom),
+      "datetime_leq": time.strftime("%Y-%m-%dT%H:%M:%SZ", rangeUntil),
       # "OR":[{"action": "block"}, {"action": "managed_challenge"}, {"action": "jschallenge"}],
       "AND":[
           {"action_neq": "allow"},
+          {"action_neq": "skip"},
           {"action_neq": "challenge_solved"},
           {"action_neq": "challenge_failed"},
           {"action_neq": "challenge_bypassed"},
@@ -130,7 +134,8 @@ def report_bad_ip(it):
     params = {
       'ip': it['clientIP'],
       'categories': '9,13,14,15,16,19,20,21',
-      'comment': get_comment(it)
+      'comment': get_comment(it),
+      'timestamp': it['datetime']
     }
     headers = {
       'Accept': 'application/json',
@@ -156,11 +161,11 @@ excepted_ruleId = ["fa01280809254f82978e827892db4e46"]
 
 # Print start time and end time within output
 print("==================== Start ====================")
-print(str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())))
-print(str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()-60*60*8))))
+print("Events from:  " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeFrom)))
+print("Events until: " + str(time.strftime("%Y-%m-%d %H:%M:%S", rangeUntil)))
 a=get_blocked_ip()
 print(str(type(a)))
-if str(type(a)) == "<class 'dict'>" and len(a)>0:
+if isinstance(a, dict) and len(a)>0:
   ip_bad_list=a["data"]["viewer"]["zones"][0]["firewallEventsAdaptive"]
   print(len(ip_bad_list))
 

@@ -12,13 +12,13 @@ The script first imports several libraries: `json`, `requests`, `time`, `os`, `y
 
 `time` is used to get the current time and format it for use in the query payload.
 
-`os` and `sys` are used to load configuration data from a YAML file or command line arguments.
+`os` and `sys` are used to load configuration data from a YAML file or environment variables.
 
 The `load_config` function reads a YAML file and returns a dictionary of the file's contents.
 
-If a `config.yml` file exists in the current directory, the script loads configuration data from it. If the file does not exist, the script expects to receive four command line arguments: `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, `CLOUDFLARE_API_KEY`, and `ABUSEIPDB_API_KEY`.
+If a `config.yml` file exists in the current directory, the script loads configuration data from it. If the file does not exist, the script instead loads the configuration data from the following four environment variables: `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, `CLOUDFLARE_API_KEY`, and `ABUSEIPDB_API_KEY`.
 
-The script then constructs a payload containing a GraphQL query that filters Cloudflare's firewall event logs for potentially malicious events that occurred within the last 8.5 hours. The payload includes Cloudflare's `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, and `CLOUDFLARE_API_KEY` for authentication. The payload is sent as a `JSON` string to the Cloudflare API.
+The script then constructs a payload containing a GraphQL query that filters Cloudflare's firewall event logs for potentially malicious events that occurred within the last 2.5 hours. The payload includes Cloudflare's `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, and `CLOUDFLARE_API_KEY` for authentication. The payload is sent as a `JSON` string to the Cloudflare API.
 
 The script defines a function `get_blocked_ip` that sends the payload to the Cloudflare API and returns a list of potentially malicious IP addresses. The function retries the API call up to 60 times, with a 1 second pause between each attempt, before giving up.
 
@@ -26,7 +26,7 @@ The script defines a function `get_comment` that takes a dictionary containing i
 
 The script defines a function `report_bad_ip` that takes a dictionary containing information about a potentially malicious IP address, constructs a payload containing the IP address and associated details, and sends the payload to the AbuseIPDB API to report the IP address as potentially malicious.
 
-The script prints a message indicating that it has started and the current time. It then calls the `get_blocked_ip` function to retrieve a list of potentially malicious IP addresses from Cloudflare's firewall event logs. If the function returns a non-empty list, the script calls the `report_bad_ip` function for each IP address in the list, excluding any IP addresses associated with a specific rule ID. The script prints a message indicating the number of potentially malicious IP addresses found in the event logs.
+The script prints a message indicating that it has started and the time range of the events it considers. It then calls the `get_blocked_ip` function to retrieve a list of potentially malicious IP addresses from Cloudflare's firewall event logs. If the function returns a non-empty list, the script calls the `report_bad_ip` function for each IP address in the list, excluding any IP addresses associated with a specific rule ID. The script prints a message indicating the number of potentially malicious IP addresses found in the event logs.
 
 ## How to use for yourself
 
@@ -35,7 +35,7 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 # First, Enable and Configure GitHub Actions：
 
 If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up.
-After you create a new repository thru "Use This Template", go into the repository settings, then go to "Secrets", then add the following things with the following names. 
+After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
 
 - `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
 - `CLOUDFLARE_API_KEY`: Cloudflare API Key
@@ -46,7 +46,7 @@ After you create a new repository thru "Use This Template", go into the reposito
 
 **PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
 
-DO NOT TURN THIS ON IN IT'S DEFAULT EXISTANCE IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS
+DO NOT TURN THIS ON IN IT'S DEFAULT EXISTENCE IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS
 YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
 
 ## Related
@@ -55,7 +55,7 @@ YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
 
 ## Support
 
-[AbuseIPDB](https://www.abuseipdb.com/) : AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks
+[AbuseIPDB](https://www.abuseipdb.com/): AbuseIPDB is an IP address blacklist for webmasters and sysadmins to report IP addresses engaging in abusive behavior on their networks
 
 [Cloudflare](https://www.cloudflare.com/)
 
@@ -71,7 +71,7 @@ This number is tied to the code in this very repo.
 
 If this number is going up, ours is working, even if yours doesn't seem to be.
 
-Consider yourself an...unsmooth operator.
+Consider yourself an... unsmooth operator.
 
 ## License
 
