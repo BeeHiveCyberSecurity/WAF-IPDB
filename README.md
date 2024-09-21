@@ -33,17 +33,17 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 
 >[!TIP]
 >If you don't configure these, you'll stare at errors for eternity wondering where you're going wrong.
->After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
->
->- `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
->- `CLOUDFLARE_API_KEY`: Cloudflare API Key
->- `CLOUDFLARE_EMAIL`: Cloudflare Email
->- `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
->
->After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
+After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
+
+- `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
+- `CLOUDFLARE_API_KEY`: Cloudflare API Key
+- `CLOUDFLARE_EMAIL`: Cloudflare Email
+- `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
+
+After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
 
 >[!TIP]
->**PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IPs for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
+>Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IPs for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
 
 ## Related
 
