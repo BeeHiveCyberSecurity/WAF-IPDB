@@ -6,21 +6,18 @@ This is a Python script that queries Cloudflare's firewall event logs and report
 
 The script first imports several libraries: `json`, `requests`, `time`, `os`, `yaml`, and `sys`.
 
-`json` is used for encoding and decoding JSON data, which is used by the Cloudflare and AbuseIPDB APIs.
-
-`requests` is used to make HTTP requests to the Cloudflare and AbuseIPDB APIs.
-
-`time` is used to get the current time and format it for use in the query payload.
-
-`os` and `sys` are used to load configuration data from a YAML file or environment variables.
+- `json` is used for encoding and decoding JSON data, which is used by the Cloudflare and AbuseIPDB APIs.
+- `requests` is used to make HTTP requests to the Cloudflare and AbuseIPDB APIs.
+- `time` is used to get the current time and format it for use in the query payload.
+- `os` and `sys` are used to load configuration data from a YAML file or environment variables.
 
 The `load_config` function reads a YAML file and returns a dictionary of the file's contents.
 
 If a `config.yml` file exists in the current directory, the script loads configuration data from it. If the file does not exist, the script instead loads the configuration data from the following four environment variables: `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, `CLOUDFLARE_API_KEY`, and `ABUSEIPDB_API_KEY`.
 
-The script then constructs a payload containing a GraphQL query that filters Cloudflare's firewall event logs for potentially malicious events that occurred within the last 2.5 hours. The payload includes Cloudflare's `CLOUDFLARE_ZONE_ID`, `CLOUDFLARE_EMAIL`, and `CLOUDFLARE_API_KEY` for authentication. The payload is sent as a `JSON` string to the Cloudflare API.
+The script then constructs a payload containing a GraphQL query that filters Cloudflare's firewall event logs for potentially malicious events that occurred within the last 2.5 hours. The payload includes Cloudflare's `CLOUDFLARE_ZONE_ID` for authentication. The payload is sent as a `JSON` string to the Cloudflare API.
 
-The script defines a function `get_blocked_ip` that sends the payload to the Cloudflare API and returns a list of potentially malicious IP addresses. The function retries the API call up to 60 times, with a 1 second pause between each attempt, before giving up.
+The script defines a function `get_blocked_ip` that sends the payload to the Cloudflare API and returns a list of potentially malicious IP addresses. The function retries the API call up to 60 times before giving up.
 
 The script defines a function `get_comment` that takes a dictionary containing information about a potentially malicious IP address and returns a string that describes the IP address and associated details for reporting to AbuseIPDB.
 
@@ -34,20 +31,19 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 
 # First, Enable and Configure GitHub Actions：
 
-If you don't configure these, you'll stare at errors for eternity wondering where you're fucking up.
-After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
+>[!TIP]
+>If you don't configure these, you'll stare at errors for eternity wondering where you're going wrong.
+>After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
+>
+>- `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
+>- `CLOUDFLARE_API_KEY`: Cloudflare API Key
+>- `CLOUDFLARE_EMAIL`: Cloudflare Email
+>- `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
+>
+>After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
 
-- `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
-- `CLOUDFLARE_API_KEY`: Cloudflare API Key
-- `CLOUDFLARE_EMAIL`: Cloudflare Email
-- `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
-
-  After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
-
-**PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IP's for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
-
-DO NOT TURN THIS ON IN IT'S DEFAULT EXISTENCE IF YOUR WAF CONFIG IS FUCKING OBNOXIOUS
-YOU WILL RUIN IT FOR EVERYONE AND CAUSE GENERAL TECHNICAL MAYHEM.
+>[!TIP]
+>**PLEASE READ THIS:** Before you enable this for the first time and allow it to start reporting, REVIEW YOUR WAF SETTINGS. This worker will report your firewall events overall, so if you have a configuration that causes requests to generate logs for no reason, OR a specific security setting that issues Managed Challenges regardless of condition, then you'll equally start reporting random IPs for no reason. If you do this, your AbuseIPDB key will be revoked, and your account could be locked and/or terminated. 
 
 ## Related
 
