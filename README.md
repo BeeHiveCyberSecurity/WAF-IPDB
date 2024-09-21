@@ -31,14 +31,14 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 
 ## Enable and Configure GitHub Actions
 
->[!TIP]
+>[!WARNING]
 >If you don't configure these, you'll stare at errors for eternity wondering where you're going wrong.
 
 After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
 
-- `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
+- `CLOUDFLARE_ZONE_ID`: Cloudflare Zone ID
 - `CLOUDFLARE_API_KEY`: Cloudflare API Key
-- `CLOUDFLARE_EMAIL`: Cloudflare Email
+- `CLOUDFLARE_EMAIL`: Cloudflare Account Email
 - `ABUSEIPDB_API_KEY`: AbuseIPDB API Key
 
 After this, modify the name of your `report.yml` workflow to make the repository name match YOUR repository name. 
