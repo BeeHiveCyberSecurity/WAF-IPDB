@@ -1,6 +1,6 @@
 # Cloudflare WAF to AbuseIPDB
 
-## Summary
+# Description
 
 This is a Python script that queries Cloudflare's firewall event logs and reports any potentially malicious IP addresses to AbuseIPDB, a database that tracks IPs associated with malicious activities.
 
@@ -25,11 +25,11 @@ The script defines a function `report_bad_ip` that takes a dictionary containing
 
 The script prints a message indicating that it has started and the time range of the events it considers. It then calls the `get_blocked_ip` function to retrieve a list of potentially malicious IP addresses from Cloudflare's firewall event logs. If the function returns a non-empty list, the script calls the `report_bad_ip` function for each IP address in the list, excluding any IP addresses associated with a specific rule ID. The script prints a message indicating the number of potentially malicious IP addresses found in the event logs.
 
-## How to use for yourself
+# Getting started
 
 Don't fork this repo - that's not how this is designed to be used. Instead, select "Use this template", then "Create new repository".
 
-# First, Enable and Configure GitHub Actions：
+## Enable and Configure GitHub Actions
 
 >[!TIP]
 >If you don't configure these, you'll stare at errors for eternity wondering where you're going wrong.
