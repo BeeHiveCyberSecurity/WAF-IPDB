@@ -145,7 +145,7 @@ def report_bad_ip(event):
         print("reported:", event['clientIP'])
     except requests.RequestException as e:
         print(f"Error reporting IP: {e}")
-        if response is not None:
+        if 'response' in locals() and response is not None:
             print(json.dumps(response.json(), sort_keys=True, indent=4))
 
 # Define a list of excluded Cloudflare WAF Rule IDs
