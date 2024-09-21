@@ -120,12 +120,11 @@ def get_blocked_ip():
 
 # Define a function to generate a comment for the Bad IP Address report intended for AbuseIPDB
 def get_comment(event):
-    return (f"Threat Blocked by BeeHive from (ASN:{event['clientAsn']}) "
-            f"(Network:{event['clientASNDescription']}) "
-            f"(Host:{event['clientRequestHTTPHost']}) "
-            f"(Method:{event['clientRequestHTTPMethodName']}) "
-            f"(Protocol:{event['clientRequestHTTPProtocol']}) "
-            f"(Timestamp:{event['datetime']})")
+    return (f"Malicious activity detected from {event['clientAsn']} "
+            f"{event['clientASNDescription']}) "
+            f"towards host {event['clientRequestHTTPHost']} "
+            f"({event['clientRequestHTTPMethodName']} {event['clientRequestHTTPProtocol']})  "
+            f"@ {event['datetime']}")
 
 # Define a function to report a bad IP address to AbuseIPDB
 def report_bad_ip(event):
