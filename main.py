@@ -121,7 +121,7 @@ def get_blocked_ip():
 # Define a function to generate a comment for the Bad IP Address report intended for AbuseIPDB
 def get_comment(event):
     return (f"Malicious activity detected from {event['clientAsn']} "
-            f"{event['clientASNDescription']}) "
+            f"{event['clientASNDescription']} "
             f"towards host {event['clientRequestHTTPHost']} "
             f"({event['clientRequestHTTPMethodName']} {event['clientRequestHTTPProtocol']})  "
             f"@ {event['datetime']}")
