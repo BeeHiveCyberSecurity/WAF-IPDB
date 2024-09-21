@@ -33,6 +33,7 @@ Don't fork this repo - that's not how this is designed to be used. Instead, sele
 
 >[!TIP]
 >If you don't configure these, you'll stare at errors for eternity wondering where you're going wrong.
+
 After you create a new repository through "Use This Template", go into the repository settings, then go to "Secrets and variables" -> "Actions", then add the following repository secrets with the following names and the corresponding values:
 
 - `CLOUDFLARE_ZONE_ID`: Cloudflare ZONE ID
